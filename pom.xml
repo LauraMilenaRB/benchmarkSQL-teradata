@@ -61,6 +61,14 @@
 			<version>9.2.1.jre8</version>
 		</dependency>
 
+		<!-- Teradata Driver -->
+		<!-- https://mvnrepository.com/artifact/com.teradata.jdbc.terajdbc4/terajdbc4 -->
+		<dependency>
+			<groupId>com.teradata.jdbc.terajdbc4</groupId>
+			<artifactId>terajdbc4</artifactId>
+			<version>17.00.00.03</version>
+		</dependency>
+		
 	</dependencies>
 
 	<!-- When executing mvn, it cleans the target directory, and then creates 
