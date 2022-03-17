@@ -9,5 +9,5 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/informix/jdbc/4.50.4.1/jdbc-4.50.4.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/mongodb/bson/3.8.0/bson-3.8.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/microsoft/sqlserver/mssql-jdbc/9.2.1.jre8/mssql-jdbc-9.2.1.jre8.jar" enabled="true" runInBatchMode="false"/>
-	<factorypathentry kind="VARJAR" id="M2_REPO/terajdbc4.jar" enabled="true" runInBatchMode="false"/>
+	<factorypathentry kind="VARJAR" id="M2_REPO/com/teradata/jdbc/terajdbc4/17.10.00.27/terajdbc4-17.10.00.27.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>
