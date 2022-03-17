@@ -61,13 +61,13 @@
 			<version>9.2.1.jre8</version>
 		</dependency>
 
-		<!-- Teradata Driver -->
-		<!-- https://mvnrepository.com/artifact/com.teradata.jdbc.terajdbc4/terajdbc4 -->
+		<!-- https://mvnrepository.com/artifact/com.teradata.jdbc/teradatajdbc4 -->
 		<dependency>
-			<groupId>com.teradata.jdbc.terajdbc4</groupId>
+			<groupId>com.teradata.jdbc</groupId>
 			<artifactId>terajdbc4</artifactId>
-			<version>17.00.00.03</version>
+			<version>17.10.00.27</version>
 		</dependency>
+
 		
 	</dependencies>
 
