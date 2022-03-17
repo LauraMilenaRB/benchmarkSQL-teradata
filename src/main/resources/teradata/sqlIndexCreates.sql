@@ -9,14 +9,12 @@ alter table benchmarksql.district add constraint pk_district
 alter table benchmarksql.customer add constraint pk_customer 
   primary key (c_w_id, c_d_id, c_id);
 
-create index ndx_customer_name 
-  on  benchmarksql.customer (c_w_id, c_d_id, c_last, c_first);
+create unique index ndx_customer_name (c_w_id, c_d_id, c_last, c_first) on benchmarksql.customer;
 
 alter table benchmarksql.oorder add constraint pk_oorder 
   primary key (o_w_id, o_d_id, o_id);
 
-create unique index ndx_oorder_carrier 
-  on  benchmarksql.oorder (o_w_id, o_d_id, o_carrier_id, o_id);
+create unique index ndx_oorder_carrier (o_w_id, o_d_id, o_carrier_id, o_id) on benchmarksql.oorder ;
  
 alter table benchmarksql.new_order add constraint pk_new_order 
   primary key (no_w_id, no_d_id, no_o_id);
