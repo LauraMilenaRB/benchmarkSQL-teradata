@@ -1,7 +1,7 @@
-CREATE DATABASE benchmarksql;
+CREATE DATABASE benchmarksql AS PERMANENT 5000e6, SPOOL = 10000e6;
 -- Creates all tables of the model.
 
-CREATE SET TABLE benchmarksql.warehouse (
+CREATE TABLE benchmarksql.warehouse (
   w_id        integer   not null,
   w_ytd       decimal(12,2),
   w_tax       decimal(4,4),
@@ -13,7 +13,7 @@ CREATE SET TABLE benchmarksql.warehouse (
   w_zip       char(9)
 );
 
-CREATE SET TABLE benchmarksql.district (
+CREATE TABLE benchmarksql.district (
   d_w_id       integer       not null,
   d_id         integer       not null,
   d_ytd        decimal(12,2),
@@ -27,7 +27,7 @@ CREATE SET TABLE benchmarksql.district (
   d_zip        char(9)
 );
 
-CREATE SET TABLE benchmarksql.customer (
+CREATE TABLE benchmarksql.customer (
   c_w_id         integer        not null,
   c_d_id         integer        not null,
   c_id           integer        not null,
@@ -52,7 +52,7 @@ CREATE SET TABLE benchmarksql.customer (
 );
 
 
-CREATE SET TABLE benchmarksql.history (
+CREATE TABLE benchmarksql.history (
   hist_id  integer not null GENERATED ALWAYS AS IDENTITY,
   h_c_id   integer,
   h_c_d_id integer,
@@ -65,7 +65,7 @@ CREATE SET TABLE benchmarksql.history (
 );
 
 
-CREATE SET TABLE benchmarksql.oorder (
+CREATE TABLE benchmarksql.oorder (
   o_w_id       integer      not null,
   o_d_id       integer      not null,
   o_id         integer      not null,
@@ -77,14 +77,14 @@ CREATE SET TABLE benchmarksql.oorder (
 );
 
 
-CREATE SET TABLE benchmarksql.new_order (
+CREATE TABLE benchmarksql.new_order (
   no_w_id  integer   not null,
   no_d_id  integer   not null,
   no_o_id  integer   not null
 );
 
 
-CREATE SET TABLE benchmarksql.order_line (
+CREATE TABLE benchmarksql.order_line (
   ol_w_id         integer   not null,
   ol_d_id         integer   not null,
   ol_o_id         integer   not null,
@@ -98,7 +98,7 @@ CREATE SET TABLE benchmarksql.order_line (
 );
 
 
-CREATE SET TABLE benchmarksql.stock (
+CREATE TABLE benchmarksql.stock (
   s_w_id       integer       not null,
   s_i_id       integer       not null,
   s_quantity   decimal(4,0),
@@ -119,7 +119,7 @@ CREATE SET TABLE benchmarksql.stock (
 );
 
 
-CREATE SET TABLE benchmarksql.item (
+CREATE TABLE benchmarksql.item (
   i_id     integer      not null,
   i_name   varchar(24),
   i_price  decimal(5,2),
