@@ -6,13 +6,13 @@ alter table benchmarksql.district drop constraint pk_district;
 
 alter table benchmarksql.customer drop constraint pk_customer;
 
-drop index ndx_customer_name;
+drop index ndx_customer_name on benchmarksql.customer;
 
 -- History table has no primary key.
 
 alter table benchmarksql.oorder drop constraint pk_oorder;
 
-drop index ndx_oorder_carrier;
+drop index ndx_oorder_carrier on benchmarksql.oorder;
 
 alter table benchmarksql.new_order drop constraint pk_new_order;
 
