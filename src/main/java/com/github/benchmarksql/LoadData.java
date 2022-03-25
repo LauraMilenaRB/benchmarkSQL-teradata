@@ -39,6 +39,7 @@ import com.github.benchmarksql.jtpcc.pojo.Oorder;
 import com.github.benchmarksql.jtpcc.pojo.OrderLine;
 import com.github.benchmarksql.jtpcc.pojo.Stock;
 import com.github.benchmarksql.jtpcc.pojo.Warehouse;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * Load Sample Data directly into database tables or create CSV files for each
@@ -134,7 +135,6 @@ public class LoadData implements jTPCCConfig {
 		totalRows += loadCust(numWarehouses, configDistPerWhse, configCustPerDist);
 		System.out.println("");
 		totalRows += loadOrder(numWarehouses, configDistPerWhse, configCustPerDist);
-
 		long runTimeMS = (new java.util.Date().getTime()) + 1 - startTimeMS;
 		endDate = new java.util.Date();
 		System.out.println("");
@@ -351,9 +351,6 @@ public class LoadData implements jTPCCConfig {
 			System.out.println(etStr.substring(0, 30) + "  Writing final records " + k + " of " + t);
 			lastTimeMS = tmpTime;
 
-			if (outputFiles == false) {
-				itemPrepStmt.executeBatch();
-			}
 			transCommit();
 			now = new java.util.Date();
 			System.out.println("End Item Load @  " + now);
@@ -569,9 +566,7 @@ public class LoadData implements jTPCCConfig {
 			String etStr = "  Elasped Time(ms): " + ((tmpTime - lastTimeMS) / 1000.000) + "                    ";
 			System.out.println(etStr.substring(0, 30) + "  Writing final records " + k + " of " + t);
 			lastTimeMS = tmpTime;
-			if (outputFiles == false) {
-				stckPrepStmt.executeBatch();
-			}
+
 			transCommit();
 
 			now = new java.util.Date();
@@ -812,7 +807,7 @@ public class LoadData implements jTPCCConfig {
 								custPrepStmt.executeBatch();
 								histPrepStmt.executeBatch();
 								custPrepStmt.clearBatch();
-								custPrepStmt.clearBatch();
+								histPrepStmt.clearBatch();
 								transCommit();
 							}
 						} else {
@@ -878,8 +873,6 @@ public class LoadData implements jTPCCConfig {
 				out.close();
 				outHist.close();
 			} else {
-				custPrepStmt.executeBatch();
-				histPrepStmt.executeBatch();
 				transCommit();
 			}
 
@@ -910,6 +903,7 @@ public class LoadData implements jTPCCConfig {
 
 		int k = 0;
 		int t = 0;
+		boolean flag = false;
 		PrintWriter outO = null;
 		PrintWriter outLine = null;
 		PrintWriter outNewOrder = null;
@@ -977,10 +971,10 @@ public class LoadData implements jTPCCConfig {
 							new_order.setNo_w_id(w);
 							new_order.setNo_d_id(d);
 							new_order.setNo_o_id(c);
-
 							k++;
 							if (outputFiles == false) {
 								myJdbcIO.insertNewOrder(nworPrepStmt, new_order);
+								flag = true;
 							} else {
 								String str = "";
 								str = str + new_order.getNo_w_id() + ",";
@@ -1036,13 +1030,18 @@ public class LoadData implements jTPCCConfig {
 										+ "                    ";
 								System.out.println(etStr.substring(0, 30) + "  Writing record " + k + " of " + t);
 								lastTimeMS = tmpTime;
+
+
 								if (outputFiles == false) {
-									ordrPrepStmt.executeBatch();
-									nworPrepStmt.executeBatch();
+									if (flag) {
+										nworPrepStmt.executeBatch();
+										nworPrepStmt.clearBatch();
+										flag = false;
+									}
 									orlnPrepStmt.executeBatch();
-									ordrPrepStmt.clearBatch();
-									nworPrepStmt.clearBatch();
+									ordrPrepStmt.executeBatch();
 									orlnPrepStmt.clearBatch();
+									ordrPrepStmt.clearBatch();
 									transCommit();
 								}
 							}
@@ -1062,22 +1061,16 @@ public class LoadData implements jTPCCConfig {
 				outLine.close();
 				outNewOrder.close();
 			} else {
-				ordrPrepStmt.executeBatch();
-				nworPrepStmt.executeBatch();
+				//if (flag) {
+					nworPrepStmt.executeBatch();
+				//}
 				orlnPrepStmt.executeBatch();
+				ordrPrepStmt.executeBatch();
 				transCommit();
 			}
 			now = new java.util.Date();
 			System.out.println("End Orders Load @  " + now);
 
-		} catch (SQLException se) {
-			System.out.println(se.getMessage());
-			transRollback();
-			if (outputFiles == true) {
-				outO.close();
-				outLine.close();
-				outNewOrder.close();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			transRollback();

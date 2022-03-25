@@ -1,4 +1,4 @@
-CREATE DATABASE benchmarksql AS PERMANENT = 10000e6, SPOOL = 20000e6;
+CREATE DATABASE benchmarksql AS PERMANENT = 14500e6, SPOOL = 20000e6;
 -- Creates all tables of the model.
 
 CREATE TABLE benchmarksql.warehouse (

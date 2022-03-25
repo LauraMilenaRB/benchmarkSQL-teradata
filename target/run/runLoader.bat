@@ -14,4 +14,4 @@ set MY_CLASSPATH=.;..\BenchmarkSQL.jar;..\lib\*
 
 set MY_PROPERTIES=-Dprop=%1
 
-"%JAVA_HOME%\bin\java" -cp %MY_CLASSPATH% %MY_PROPERTIES% LoadData %2 %3 %4 %5
+"%JAVA_HOME%\bin\java" -cp %MY_CLASSPATH% %MY_PROPERTIES% com.github.benchmarksql.LoadData %2 %3 %4 %5
