@@ -878,7 +878,7 @@ public class jTPCCTerminal implements jTPCCConfig, Runnable {
 					stmt += "FROM " + schema + "district ";
 					stmt += "WHERE d_id = ? ";
 					stmt += " AND d_w_id = ? ";
-					stmt += "FOR UPDATE ";
+					//stmt += "FOR UPDATE ";
 					stmtGetDist = conn.prepareStatement(stmt);
 				}
 
@@ -1011,7 +1011,7 @@ public class jTPCCTerminal implements jTPCCConfig, Runnable {
 					stmt += "FROM " + schema + "stock ";
 					stmt += "WHERE s_i_id = ? ";
 					stmt += " AND s_w_id = ? ";
-					stmt += "FOR UPDATE ";
+					//stmt += "FOR UPDATE ";
 					stmtGetStock = conn.prepareStatement(stmt);
 				}
 
