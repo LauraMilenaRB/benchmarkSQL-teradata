@@ -1061,9 +1061,9 @@ public class LoadData implements jTPCCConfig {
 				outLine.close();
 				outNewOrder.close();
 			} else {
-				//if (flag) {
+				if (flag) {
 					nworPrepStmt.executeBatch();
-				//}
+				}
 				orlnPrepStmt.executeBatch();
 				ordrPrepStmt.executeBatch();
 				transCommit();
