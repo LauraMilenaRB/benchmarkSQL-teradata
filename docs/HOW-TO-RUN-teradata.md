@@ -151,9 +151,9 @@ To clean the database, you can run.
 
 _Windows:_
 
-    runSQL teradata\teradata.properties db2\sqlTableDrops.sql
+    runSQL teradata\teradata.properties teradata\sqlTableDrops.sql
 
 _Linux:_
 
-    ./runSQL teradata/teradata.properties db2/sqlTableDrops.sql
+    ./runSQL teradata/teradata.properties teradata/sqlTableDrops.sql
 
